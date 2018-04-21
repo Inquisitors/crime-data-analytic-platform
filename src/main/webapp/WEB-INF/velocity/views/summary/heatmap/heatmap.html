@@ -1,0 +1,123 @@
+
+
+<div ng-controller="mapController as ctrl">
+    <div id="wrapper">
+        <div id="over_map">
+            <!--<div id="params1" style="padding-top:10px; padding-bottom: 10px">-->
+    <form ng-submit="submit()"  ng-cloak>
+
+        <!--<md-card>-->
+            <!--<md-card-content>-->
+                <form ng-submit="submit()"  ng-cloak>
+                    <div class="row">
+                        <div class="col-md-2">
+                    <fieldset>
+                        <legend>Select Option</legend>
+                    <md-radio-group ng-model="data.group1">
+
+                                <md-radio-button value="Season">Period wise</md-radio-button>
+                                <md-radio-button value="Category">Category Wise</md-radio-button>
+                                <md-radio-button value="time-laps">Time-Lapse</md-radio-button>
+                                <md-radio-button value="duration">Duration</md-radio-button>
+                    </md-radio-group>
+                    </fieldset>
+                        </div>
+                        <div class="col-md-4">
+                            <div ng-if="data.group1 == 'time-laps'">
+                                <fieldset>
+                                    <legend>Time Laps</legend>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                    <br>
+
+                                    <md-checkbox ng-model="dataCb2.value" aria-label="Checkbox 1">
+                                        Aggregate
+                                    </md-checkbox>
+                                    <br>
+
+                                            <md-button class="md-raised md-primary" ng-click="playNow()">Play</md-button>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <label><h1>{{yearLabel.value}}</h1></label>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                            <div ng-if="data.group1 == 'duration'">
+                            <fieldset>
+                                <legend>Select Duration/Date</legend>
+                                <md-checkbox ng-model="dataCb1.value" aria-label="Checkbox 1">
+                                    Date Range
+                                </md-checkbox>
+
+                                <div layout="row" layout-align="start start">
+                                    <div>
+                                <md-input-container>
+                                    <label>Enter date</label>
+                                    <md-datepicker ng-model="userSubmissionDate.value"></md-datepicker>
+                                </md-input-container>
+                                    </div>
+                                    <div ng-if="dataCb1.value == true">
+                                        <md-input-container>
+                                            <label>Enter date 2</label>
+                                            <md-datepicker ng-model="userSubmissionDate2.value"></md-datepicker>
+                                        </md-input-container>
+                                    </div>
+                                    </div>
+                                <md-button class="md-raised md-primary" ng-click="setDuration()" ng-disabled="(userSubmissionDate.value =='' && dataCb1.value == false) || (dataCb1.value == true && (userSubmissionDate.value =='' || userSubmissionDate2.value ==''))">Generate</md-button>
+                                </fieldset>
+                                </div>
+                        </div>
+                        <div class="col-md-6">
+                    <div ng-if="data.group1 == 'Category'">
+                        <fieldset>
+                            <legend>Select Category</legend>
+                <div ng-repeat="cat in categoryList" style="float:left">
+                    <md-checkbox aria-label="Checkbox 1" ng-model="listModel[categoryList.indexOf(cat)]"  ng-change="initialize(categoryList.indexOf(cat))">
+                        {{cat}} <!--{{ data.fraud }}-->
+                    </md-checkbox>
+                </div>
+                            </fieldset>
+                        </div>
+                    <div ng-if="data.group1 == 'Season'">
+
+                        <fieldset>
+                            <legend>Select Period</legend>
+                            <input type="radio" ng-model="value" value="one" class="md-primary"  ng-change="setSpecialMap(value)">Weekends</input>
+                            <br>
+                            <input type="radio" ng-model="value" value="two" class="md-primary"  ng-change="setSpecialMap(value)">Weekdays</input>
+                            <br>
+                            <input type="radio" ng-model="value" value="three" class="md-primary" ng-change="setSpecialMap(value)">New year eve</input>
+                        </fieldset>
+
+                    </div>
+                        </div>
+                    </div>
+                </form>
+            <!--</md-card-content>-->
+        <!--</md-card>-->
+    </form>
+            <!--</div>-->
+            </div>
+    </div>
+    <div class="overlay" ng-if="isLoading == true">
+        <div class="container" ng-class="{'visible' : !vm.activated}">
+            <!--<md-progress-linear md-mode="query" ng-disabled="!vm.showList[1]"></md-progress-linear>-->
+            <div id="progress-middle">
+                <md-progress-circular md-mode="indeterminate" ng-show="isLoading"  md-diameter="150"></md-progress-circular>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+    <div id="map" style="width:100%; height:100%; float: left"></div>
+
+
+
+
+
+
+
+
+<script src="/resources/data/heatmap-locations.js"></script>

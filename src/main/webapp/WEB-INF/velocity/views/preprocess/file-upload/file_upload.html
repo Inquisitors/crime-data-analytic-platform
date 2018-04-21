@@ -1,0 +1,104 @@
+<div class="container">
+<div class="row" ng-controller="fileuploadController">
+
+    <!--<div class="col-md-2"></div>-->
+    <!--<div class="col-md-8">-->
+
+        <md-card>
+            <md-card-content>
+                <form name="myForm">
+                <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8">
+                <img ng-src="{{imagePath}}" class="md-card-image" alt="Washed Out">
+                    </div>
+                    <div class="col-md-2"></div>
+                </div>
+                <md-card-title>
+                    <md-card-title-text>
+                        <h1 class="page-header">Preprocessing
+                            <small>Enter a Name for Newly Created Table</small>
+                        </h1>
+                    </md-card-title-text>
+                </md-card-title>
+
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <md-card>
+                            <md-card-title>
+                                <md-card-title-text>
+                                    <span class="md-headline">Enter Table Name Here</span>
+                                </md-card-title-text>
+                            </md-card-title>
+                            <md-card-content>
+                <div layout="row" layout-align="start start">
+                <!--<div><label>Table Name for Preprocessed Dataset</label></div>-->
+
+                    <div>
+                    <md-input-container>
+                    <label>Table name</label>
+                    <input ng-model="tableName" required>
+                        <div ng-messages="tableName.$error">
+                        <div ng-message="required">This is required!</div>
+                            </div>
+                </md-input-container>
+                    </div>
+                </div>
+                                </md-card-content>
+                            </md-card>
+                        </div>
+                        <div class="col-md-6">
+                            <md-card>
+                                <md-card-title>
+                                    <md-card-title-text>
+                                        <span class="md-headline">Preprocessing</span>
+                                    </md-card-title-text>
+                                </md-card-title>
+                                <md-card-content>
+                                    <p>Enter a table name and submit for pre processing to start.</p>
+                                    <ul>
+                                        <li>Upload a Crime File</li>
+                                        <li>Configure the File</li>
+                                        <li>Preprocess by giving a table name</li>
+                                    </ul>
+                                </md-card-content>
+                            </md-card>
+                        </div>
+                    </div>
+
+                <p>
+                    <!--Selected file : {{fileName}}
+                    <br>
+                    Table Name : {{tableName}}
+                    <br>-->
+                <div layout="row" layout-align="end center">
+                    <md-button ng-disabled="myForm.$invalid" class="md-raised md-primary" ng-click="submitFile()">Submit</md-button>
+
+                <!--<div class="container" ng-class="{'visible' : !vm.activated}">-->
+                    <!--&lt;!&ndash;<md-progress-linear md-mode="query" ng-disabled="!vm.showList[1]"></md-progress-linear>&ndash;&gt;-->
+                    <!--<md-progress-circular md-mode="indeterminate" ng-show="isLoading"></md-progress-circular>-->
+                    <!--<div class="bottom-block">-->
+                        <!--<span ng-if="!isFileAvailable">No data set available!</span>-->
+                        <!--<span ng-if="isLoading">Processing.. Please wait..</span>-->
+                        <!--<span ng-if="isPrepCompleted">Preprocessing completed</span>-->
+                    <!--</div>-->
+                <!--</div>-->
+                </div>
+                </form>
+            </md-card-content>
+        </md-card>
+
+    <!--</div>-->
+    <!--<div class="col-md-2"></div>-->
+    <div class="overlay" ng-if="isLoading == true">
+        <div class="container" ng-class="{'visible' : !vm.activated}">
+            <!--<md-progress-linear md-mode="query" ng-disabled="!vm.showList[1]"></md-progress-linear>-->
+            <div id="progress-middle">
+            <md-progress-circular md-mode="indeterminate" ng-show="isLoading"  md-diameter="150"></md-progress-circular>
+
+            </div>
+        </div>
+    </div>
+</div>
+</div>

@@ -1,0 +1,40 @@
+<div ng-controller="TimeLapseController as vm">
+<md-card>
+    <md-card-content>
+        <!--<div layout="row" layout-align="start center">-->
+
+        <!--<md-button class="md-fab md-mini md-primary" aria-label="Use Android">-->
+        <!--<md-icon md-svg-src="img/icons/android.svg" style="color: greenyellow;"></md-icon>-->
+        <!--</md-button>-->
+
+            <rzslider rz-slider-model="vm.slider.min" rz-slider-high="vm.slider.max" rz-slider-options="vm.slider.options"></rzslider>
+            {{vm.slider.value}}
+
+        <div ng-controller="TimeLapseController as vm" layout="row" layout-align="end start">
+            <!--<div>
+            <md-button ng-click="play()" class="md-fab md-mini md-primary" aria-label="Use Android">
+                <md-icon md-svg-src="resources/svg/play.svg" style="color: green;"></md-icon>
+            </md-button>
+            </div>
+            <div>
+                <md-button class="md-fab md-mini md-primary" aria-label="Use Android">
+                    <md-icon md-svg-src="resources/svg/pause.svg" style="color: green;"></md-icon>
+                </md-button>
+            </div>-->
+            <button ng-click="play()">Play</button>
+            <div class="container" layout="row" layout-align="end center" ng-class="{'visible' : !vm.activated}">
+                <!--<md-progress-linear md-mode="query" ng-disabled="!vm.showList[1]"></md-progress-linear>-->
+                <md-progress-circular md-mode="indeterminate" ng-show="isLoading"></md-progress-circular>
+                <div class="bottom-block">
+                    <span ng-if="isLoading">Retrieving.. Please wait..</span>
+
+                </div>
+            </div>
+        </div>
+
+        <!--</div>-->
+    </md-card-content>
+</md-card>
+
+<div id="map"></div>
+</div>

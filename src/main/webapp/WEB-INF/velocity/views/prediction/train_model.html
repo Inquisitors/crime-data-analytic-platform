@@ -1,0 +1,246 @@
+<div class="container">
+<div  ng-controller="TrnCtrl">
+<md-card>
+    <md-card-content>
+        <md-card-title>
+            <md-card-title-text>
+                <span class="md-headline">Select Options</span>
+                <span class="md-subhead">Select options to train your model</span>
+            </md-card-title-text>
+            <!--<div>-->
+                <!--<md-checkbox ng-model="raceData" aria-label="Checkbox 1" ng-checked="">-->
+                    <!--Add Race Data-->
+                <!--</md-checkbox>-->
+            <!--</div>-->
+        </md-card-title>
+        <form name="projectForm">
+            <div layout="row" layout-align="space-between start">
+                <div ng-cloak="" class="inputdemoErrors">
+                    <!--<input name="postalCode" ng-model="postalCode" placeholder="12345" required="">-->
+                    <md-content>
+                        <!--layout-padding="row"-->
+
+                        <!--class="md-block"-->
+                        <md-input-container>
+                            <!--flex="50"-->
+                            <label>Classification Algorithm</label>
+                            <md-select name="type" ng-model="selectedAlgo.type" required>
+                                <md-option ng-repeat="x in algos" value="{{x.value}}">{{x.algo}}</md-option>
+                            </md-select>
+                        </md-input-container>
+                    </md-content>
+
+                    <div layout="row" ng-if="selectedAlgo.type == 'two'">
+                        <md-input-container>
+                        <label>Number of Trees </label>
+                        <!--<input type="number" ng-model="selectedAlgo.trees">-->
+                        <input type="number"  ng-model="trees.value" >
+                        </md-input-container>
+                        <md-input-container>
+                            <label>Seeds</label>
+                            <input type="number" ng-model="seeds.value" min="0" required>
+                            <!--<div ng-message="required">This is required!</div>-->
+                        </md-input-container>
+                    </div>
+
+                    <div layout="row" layout-align="space-between start" ng-if="selectedAlgo.type == 'one'">
+                        <div>
+                            <md-input-container>
+                                <label>Block Size</label>
+                                <input type="number" ng-model="blocksize.value" min="0">
+                            </md-input-container>
+                        </div>
+                        <div>
+                            <md-input-container>
+                                <label>Max Iterations</label>
+                                <input type="number" ng-model="maxIterations.value" min="0">
+                            </md-input-container>
+                        </div>
+                        <div>
+                            <md-input-container>
+                                <label>Nodes per Layer</label>
+                                <input ng-model="nodes.value" required>
+                                <div class="hint">Eg:-if 3 layers enter 1,2,3</div>
+                                <!--<div ng-message="required">This is required!</div>-->
+                            </md-input-container>
+
+                        </div>
+                        <md-input-container>
+                            <label>Seeds</label>
+                            <input type="number" ng-model="seeds.value" min="0" required>
+                            <!--<div ng-message="required">This is required!</div>-->
+                        </md-input-container>
+                    </div>
+                </div>
+                <div>
+                    <md-input-container>
+                        <label>Select Option</label>
+                        <md-select name="type" ng-model="selectedAlgo.option" required="">
+                            <md-option value="one">Pipeline</md-option>
+                            <md-option value="two">Cross Validation</md-option>
+                        </md-select>
+                    </md-input-container>
+                    <div layout="row" ng-if="selectedAlgo.option == 'two'">
+                        <md-input-container >
+                            <label>Number of Folds</label>
+                            <input type="number" ng-model="folds.value">
+                        </md-input-container>
+                    </div>
+                </div>
+
+                <div>
+                    <md-input-container>
+                        <label>Feature Columns</label>
+                        <md-select ng-model="selectedAlgo.columns" md-on-close="clearSearchTerm()"
+                                   data-md-container-class="selectdemoSelectHeader" multiple="">
+                            <md-select-header class="demo-select-header">
+                                <input ng-model="searchTerm" type="search" placeholder="Search for columns.."
+                                       class="demo-header-searchbox md-text">
+                            </md-select-header>
+                            <md-optgroup label="Columns">
+                                <md-option ng-value="column" ng-repeat="column in columns |
+              filter:searchTerm">{{column}}
+                                </md-option>
+                            </md-optgroup>
+                        </md-select>
+                    </md-input-container>
+                </div>
+                <div>
+
+                    <md-input-container>
+                        <label>Select the label</label>
+                        <md-select ng-model="selectedAlgo.label">
+                            <md-optgroup label="label">
+                                <md-option ng-value="label" ng-repeat="label in labels" required>{{label}}</md-option>
+                            </md-optgroup>
+                            <!--<div ng-message="required">This is required!</div>-->
+                        </md-select>
+
+                    </md-input-container>
+                    <!--md-selected-text="getSelectedText()"-->
+                </div>
+                <div>
+                    <md-input-container>
+                        <label>Number of Partitions</label>
+                        <input type="text" ng-model="selectedAlgo.partitions" fcsa-number="{ maxDecimals: 3 }" min="0.0" required>
+                        <!--<div ng-message="required">This is required!</div>-->
+                    </md-input-container>
+
+                </div>
+
+                <!--<div>-->
+                    <!--<md-input-container>-->
+                        <!--<label>Sample File</label>-->
+                        <!--<input type="text" ng-model="selectedAlgo.filepath">-->
+                    <!--</md-input-container>-->
+                <!--</div>-->
+
+
+                <div layout="row" layout-align="end start">
+                    <md-button type="submit" ng-click="trainModel()" ng-disabled="projectForm.$invalid">Submit</md-button>
+                </div>
+            </div>
+
+            <div layout="row" layout-align="start start">
+                <div>
+                    <h4>Select a file to test</h4>
+                </div>
+                <div>
+                    <md-button type="file" ng-disabled="isTrained == false" class="md-raised md-primary" ngf-select="uploadFiles($file, $invalidFiles, 0)"
+                               accept="">
+                        <!--ngf-max-height="1000"-->
+                        <!--ngf-max-size="1MB"-->
+                        Test File</md-button></div>
+                <br><br>
+                <div style="font:smaller">{{f.name}}
+                    <!--{{errFile.name}} {{errFile.$error}} {{errFile.$errorParam}}-->
+                    <span class="progress" ng-show="f.progress >= 0">
+          <div style="width:{{f.progress}}%"
+               ng-bind="f.progress + '%'"></div>
+
+      </span>
+                </div>
+            </div>
+                <div ng-if="testFileLoaded == true">
+                    <a href="{{downloadPath.value}}" download>
+                        <div layout="row" layout-align="start start">
+                            <div>Download Results</div>
+                        <div><img border="0" src="/resources/svg/download.svg" alt="Download"></div>
+                        </div>
+                    </a>
+                </div>
+
+
+            <!--<div class="container" layout="row" layout-align="end center" ng-class="{'visible' : !vm.activated}">-->
+                <!--&lt;!&ndash;<md-progress-linear md-mode="query" ng-disabled="!vm.showList[1]"></md-progress-linear>&ndash;&gt;-->
+                <!--<md-progress-circular md-mode="indeterminate" ng-show="isLoading"></md-progress-circular>-->
+                <!--<div class="bottom-block">-->
+                    <!--<span ng-if="isLoading">Training.. Please wait..</span>-->
+                    <!--<span ng-if="isPrepCompleted">Training completed</span>-->
+                <!--</div>-->
+            <!--</div>-->
+
+        </form>
+    </md-card-content>
+</md-card>
+<md-card>
+
+</md-card>
+<!--<div ng-if="isTrained == true">-->
+<div>
+    <md-card>
+        <md-card-content>
+            <md-content>
+                <md-tabs md-dynamic-height="" md-border-bottom="">
+                    <md-tab label="Evaluation">
+                        <md-content class="md-padding">
+                            <table id="table1">
+                                <tr id="tr1">
+                                    <th id="th1">Indexed Label</th>
+                                    <th id="th1">Category</th>
+                                    <th id="th1">Precision</th>
+                                    <th id="th1">Recall</th>
+                                    <th id="th1">Fmeasure</th>
+                                </tr>
+                                <tr ng-repeat="obj in content" id="tr1">
+                                    <td id="td1" ng-repeat="val in obj">
+                                        {{val}}
+                                    </td>
+                                </tr>
+                            </table>
+
+                        </md-content>
+                    </md-tab>
+                    <md-tab label="Prediction">
+                        <md-content class="md-padding">
+                            <div>
+                                <pagination
+                                        ng-model="currentPage"
+                                        total-items="results.length"
+                                        max-size="maxSize"
+                                        boundary-links="true">
+                                </pagination>
+                                <table id="table1">
+                                    <tr id="tr1" ng-repeat="result in filteredResults">
+                                        <td id="td1" ng-repeat="res in result">{{res}}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            </md-content>
+                        </md-tab>
+                </md-tabs>
+                </md-content>
+    </md-card-content>
+    </md-card>
+</div>
+    <div class="overlay" ng-if="isLoading == true">
+        <div class="container" ng-class="{'visible' : !vm.activated}">
+            <!--<md-progress-linear md-mode="query" ng-disabled="!vm.showList[1]"></md-progress-linear>-->
+            <div id="progress-middle">
+                <md-progress-circular md-mode="indeterminate" ng-show="isLoading"  md-diameter="150"></md-progress-circular>
+
+            </div>
+        </div>
+    </div>
+</div>
+</div>

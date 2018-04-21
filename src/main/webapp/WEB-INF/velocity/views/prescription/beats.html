@@ -1,0 +1,152 @@
+
+<div ng-controller="BeatsController">
+    <div id="wrapper">
+    <!--<div layout="row" layout-align="center">-->
+        <!--<md-card>-->
+            <!--<md-card-content>-->
+        <div id="over_map" layout="row" layout-align="center" >
+            <div id="params1" style="padding-top:10px; padding-bottom: 10px">
+            <input type="text" value="District ID" id="districtID" name="districtID" onfocus="if (this.value == 'District ID') this.value=''">
+                <!--<md-input-container>-->
+                    <!--<label>District ID</label>-->
+                    <!--<input ng-model="districtID" value="districtID" type="number" min="0" required>-->
+                <!--</md-input-container>-->
+                <!--<md-input-container class="md-block" flex-gt-sm="">-->
+                    <!--<label>Seasons</label>-->
+                    <!--<md-select ng-model="seasons.state">-->
+                        <!--<md-option  value="0">All</md-option>-->
+                        <!--<md-option  value="1">January - March</md-option>-->
+                        <!--<md-option  value="2">April - June</md-option>-->
+                        <!--<md-option  value="3">July - September</md-option>-->
+                        <!--<md-option  value="4">October - December</md-option>-->
+                    <!--</md-select>-->
+                <!--</md-input-container>-->
+                <!--<md-input-container class="md-block" flex-gt-sm="">-->
+                    <!--<label>Watch</label>-->
+                    <!--<md-select ng-model="seasons.state">-->
+                        <!--<md-option  value="10">Watch</md-option>-->
+                        <!--<md-option  value="0">0</md-option>-->
+                        <!--<md-option  value="1">1</md-option>-->
+                        <!--<md-option  value="2">2</md-option>-->
+                        <!--<md-option  value="3">3</md-option>-->
+                    <!--</md-select>-->
+                <!--</md-input-container>-->
+            <select id="seasons">
+                <option value="0">All</option>
+                <option value="1">January -March</option>
+                <option value="2">April -  June</option>
+                <option value="3">July - September</option>
+                <option value="4">October - December</option>
+            </select>
+            <select id="watch">
+                <option value="10">Watch</option>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
+
+            <input type="checkbox" id="weekdays" name="weekdays" value="false"> Weekdays</input>
+            <input type="checkbox" id="weekend" name="weekend" value="false"> Weekends </input>
+            <input type="text" value="Number of beats" id="nBeats" name="nbeats" onfocus="if (this.value == 'Number of beats') this.value=''">
+                <!--<md-input-container>-->
+                    <!--<label>Number of Beats</label>-->
+                    <!--<input ng-model="nBeats" value="nBeats" type="number" min="0" required>-->
+                <!--</md-input-container>-->
+            <md-button class="md-primary md-raised" ng-click="submitBeatsParams()">Submit</md-button>
+                <!--<md-button class="md-primary md-raised" ng-click="showAdvanced($event)">-->
+                    <!--Evaluate Results-->
+                <!--</md-button>-->
+                <a target="_blank" href="/#/views/beatseval">Evaluate Results</a>
+            <div class="container" layout="row" layout-align="end center" ng-class="{'visible' : !vm.activated}">
+                <!--<md-progress-linear md-mode="query" ng-disabled="!vm.showList[1]"></md-progress-linear>-->
+
+                <div class="bottom-block">
+                    <span ng-if="isLoading">Retrieving data.. Please wait..</span>
+                </div>
+            </div>
+        </div>
+            <!--</md-card-content>-->
+        <!--</md-card>-->
+
+    <!--</div>-->
+            <div id="legend">
+                <md-card>
+                    <md-card-title>
+                        <span>Legend</span>
+                    </md-card-title>
+                    <md-card-content>
+                        <ul ng-repeat="colour in colours">
+                            <li>
+                                <div layout="row" layout-align="center center">
+                                    <div><svg height="20" width="20">
+                                        <circle cx="10" cy="10" r="5" stroke="colour" stroke-width="1" fill="{{colour}}" />
+                                        Sorry, your browser does not support inline SVG.
+                                    </svg></div>
+                                    <div>{{colours.indexOf(colour)}}</div>
+                                </div></li>
+                        </ul>
+                    </md-card-content>
+                </md-card>
+            </div>
+            </div>
+        </div>
+    <!--<script type="text/ng-template" id="dialog1.tmpl.html">-->
+        <!--<md-dialog aria-label="Evaluation">-->
+            <!--<form ng-cloak>-->
+                <!--<md-toolbar>-->
+                    <!--<div class="md-toolbar-tools">-->
+                        <!--<h2>Evaluation</h2>-->
+                        <!--<span flex></span>-->
+                        <!--<md-button class="md-icon-button" ng-click="cancel()">-->
+                            <!--<md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>-->
+                        <!--</md-button>-->
+                    <!--</div>-->
+                <!--</md-toolbar>-->
+
+                <!--<md-dialog-content>-->
+                    <!--<div class="md-dialog-content">-->
+                        <!--&lt;!&ndash;<div class="row" ng-controller="histogramController_beats as ctrl">&ndash;&gt;-->
+                        <!--<div ng-controller="BeatsController">-->
+                        <!--<h1>value:{{data}}</h1>-->
+                            <!--<h1>value:{{options}}</h1>-->
+
+                        <!--<div>-->
+                            <!--&lt;!&ndash;<h1>View 2</h1>&ndash;&gt;-->
+                            <!--&lt;!&ndash; <div id="map1" style="top: 10px; left: 10px; width:700px; height:720px; float:left"></div>-->
+                             <!--<div id="map2" style="top: 10px; left: 20px; width:700px; height:720px"></div>&ndash;&gt;-->
+                            <!--<nvd3 options="options" data="data" style="top: 10px; left: 10px; width:700px; height:720px; float:left"></nvd3>-->
+                            <!--&lt;!&ndash;<nvd3 options="options2" data="data2" style="top: 10px; left: 20px; width:700px; height:720px"></nvd3>&ndash;&gt;-->
+                        <!--</div>-->
+                            <!--</div>-->
+                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+                    <!--</div>-->
+                <!--</md-dialog-content>-->
+
+                <!--&lt;!&ndash;<md-dialog-actions layout="row">&ndash;&gt;-->
+
+                <!--&lt;!&ndash;</md-dialog-actions>&ndash;&gt;-->
+            <!--</form>-->
+        <!--</md-dialog>-->
+    <!--</script>-->
+
+    <div class="overlay" ng-if="isLoading == true">
+        <div class="container" ng-class="{'visible' : !vm.activated}">
+            <!--<md-progress-linear md-mode="query" ng-disabled="!vm.showList[1]"></md-progress-linear>-->
+            <div id="progress-middle">
+                <md-progress-circular md-mode="indeterminate" ng-show="isLoading"  md-diameter="150"></md-progress-circular>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--<div id="map"></div>-->
+<div id="map1" style="width:100%; height:100%; float: left"></div>
+
+
+
+
+<script src="/resources/js/controller/BoundaryController.js"></script>

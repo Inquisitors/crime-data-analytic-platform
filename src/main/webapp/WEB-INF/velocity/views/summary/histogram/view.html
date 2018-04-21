@@ -1,0 +1,103 @@
+<div class="container">
+<div class="row" ng-controller="histogramController as ctrl">
+
+    <div>
+        <md-card>
+            <md-card-title>
+                <md-card-title-text>
+                    <h1 class="page-header">Histogram
+                        <small>Graphical Representation of Data on a Histogram</small>
+                    </h1>
+                </md-card-title-text>
+            </md-card-title>
+            <md-card-content>
+                <form ng-submit="submit()"  ng-cloak>
+
+                    <md-radio-group ng-model="data.group1">
+                        </br></br>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <md-radio-button value="Year" class="md-primary">Year wise</md-radio-button>
+                            </div>
+                            <div class="col-md-4">
+                                <md-radio-button value="Category">Category Wise</md-radio-button>
+                            </div>
+                            <div class="col-md-4">
+                                <md-radio-button value="Date">Date Wise</md-radio-button>
+                            </div>
+                        </div>
+
+                    </md-radio-group>
+                    <div ng-if="data.group1 == 'Category'">
+                        <md-input-container >
+                            <label>Category</label>
+                            <md-select ng-model="model1.value" ng-disabled="false" ng-change="updateChart('yearsCategory')">
+                                <md-option><em>None</em></md-option>
+                                <md-option ng-repeat="state in ctrl.states1" ng-value="state.abbrev">
+                                    {{state.abbrev}}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+                    </div>
+                    <br>
+                    <div ng-if="data.group1 == 'Year'">
+                        <md-input-container >
+                            <label>Year</label>
+                            <md-select ng-model="model2.value" ng-disabled="false" ng-change="updateChart('categoriesYear')">
+                                <md-option><em>None</em></md-option>
+                                <md-option ng-repeat="state in ctrl.states2" ng-value="state.abbrev" >
+                                    {{state.abbrev}}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+                    </div>
+                    <p>
+                        <!--<span >{{ description }}</span>-->
+                    </p>
+
+                </form>
+                <div ng-if="data.group1 == 'Date'">
+                    <fieldset>
+                        <legend>Select Duration/Month</legend>
+                        <md-checkbox ng-model="dataCb1.value" aria-label="Checkbox 1">
+                            Month Range
+                        </md-checkbox>
+
+                        <div layout="row" layout-align="start start">
+                            <div>
+                                <md-input-container>
+                                    <label>Enter date</label>
+                                    <md-datepicker ng-model="userSubmissionDate.value"></md-datepicker>
+                                </md-input-container>
+                            </div>
+                            <div ng-if="dataCb1.value == true">
+                                <md-input-container>
+                                    <label>Enter date 2</label>
+                                    <md-datepicker ng-model="userSubmissionDate2.value"></md-datepicker>
+                                </md-input-container>
+                            </div>
+
+                        </div>
+                        <md-button class="md-raised md-primary" ng-click="setDuration()" ng-disabled="(dataCb1.value == true && (userSubmissionDate.value > userSubmissionDate2.value)) || (dataCb1.value == true && (userSubmissionDate.value.length == 0 || userSubmissionDate2.value.length == 0)) || (dataCb1.value == false && userSubmissionDate.value.length == 0) ">Generate</md-button>
+                    </fieldset>
+                </div>
+            </md-card-content>
+        </md-card>
+    </div>
+    <md-card>
+
+        <!--<h1>View 2</h1>-->
+        <nvd3 options="options" data="data"></nvd3>
+
+    </md-card>
+    <div class="overlay" ng-if="isLoading == true">
+        <div class="container" ng-class="{'visible' : !vm.activated}">
+            <!--<md-progress-linear md-mode="query" ng-disabled="!vm.showList[1]"></md-progress-linear>-->
+            <div id="progress-middle">
+                <md-progress-circular md-mode="indeterminate" ng-show="isLoading"  md-diameter="150"></md-progress-circular>
+
+            </div>
+        </div>
+    </div>
+</div>
+</div>

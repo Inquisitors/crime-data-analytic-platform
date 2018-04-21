@@ -1,0 +1,127 @@
+<div ng-controller="BoundaryController">
+    <!--<script type="text/ng-template" id="dialog1.tmpl.html">-->
+        <!--<md-dialog aria-label="Evaluation">-->
+            <!--<form ng-cloak>-->
+                <!--<md-toolbar>-->
+                    <!--<div class="md-toolbar-tools">-->
+                        <!--<h2>Evaluation</h2>-->
+                        <!--<span flex></span>-->
+                        <!--<md-button class="md-icon-button" ng-click="cancel()">-->
+                            <!--<md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>-->
+                        <!--</md-button>-->
+                    <!--</div>-->
+                <!--</md-toolbar>-->
+
+                <!--<md-dialog-content>-->
+                    <!--<div class="md-dialog-content">-->
+                        <!--&lt;!&ndash;<div class="row" ng-controller="histogramController_beats as ctrl">&ndash;&gt;-->
+                        <!--<div>-->
+                            <!--<nvd3 options="options" data="dataDetails"></nvd3>-->
+                            <!--&lt;!&ndash;style="top: 10px; left: 10px; width:700px; height:720px; float:left"&ndash;&gt;-->
+                            <!--&lt;!&ndash;<div>&ndash;&gt;-->
+                            <!--&lt;!&ndash;&lt;!&ndash;<h1>View 2</h1>&ndash;&gt;&ndash;&gt;-->
+                            <!--&lt;!&ndash;&lt;!&ndash; <div id="map1" style="top: 10px; left: 10px; width:700px; height:720px; float:left"></div>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<div id="map2" style="top: 10px; left: 20px; width:700px; height:720px"></div>&ndash;&gt;&ndash;&gt;-->
+                            <!--&lt;!&ndash;<nvd3 options="options" data="data" style="top: 10px; left: 10px; width:700px; height:720px; float:left"></nvd3>&ndash;&gt;-->
+                            <!--&lt;!&ndash;&lt;!&ndash;<nvd3 options="options2" data="data2" style="top: 10px; left: 20px; width:700px; height:720px"></nvd3>&ndash;&gt;&ndash;&gt;-->
+                            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                        <!--</div>-->
+                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+                    <!--</div>-->
+                <!--</md-dialog-content>-->
+
+                <!--&lt;!&ndash;<md-dialog-actions layout="row">&ndash;&gt;-->
+
+                <!--&lt;!&ndash;</md-dialog-actions>&ndash;&gt;-->
+            <!--</form>-->
+        <!--</md-dialog>-->
+    <!--</script>-->
+
+    <div id="wrapper">
+<div id="over_map">
+
+    <div id="params1" style="padding-top:10px">
+
+        <!--<input type="text" value="Number of districts" id="nDistricts" name="ndistricts" onfocus="if (this.value == 'Number of districts') this.value=''">-->
+        <div class="row">
+            <form name="myForm">
+            <div class="col-md-2"></div>
+            <div class="col-md-2">
+        <md-input-container>
+            <label>Number of Districts</label>
+            <input ng-model="nDistricts" value="nDistricts" type="number" min="0" required>
+        </md-input-container>
+            </div>
+        <!--<input type="text" value="Total Population" id="population" name="population" onfocus="if (this.value == 'Total Population') this.value=''">-->
+            <div class="col-md-2">
+        <md-button md-no-ink="" class="md-primary md-raised" ng-click="submitBoundaryMapParams()" ng-disabled="myForm.$invalid">Draw District Boundaries</md-button>
+            </div>
+                <div class="col-md-4">
+        <a target="_blank"  href="/#/views/beats">Draw Patrol Beats</a>
+
+        <!--<md-button class="md-primary md-raised" ng-click="showAdvanced($event)">-->
+            <!--Evaluate Results-->
+        <!--</md-button>-->
+                    <span>|</span>
+        <a target="_blank"  href="/#/views/boundaryeval">Evaluation</a>
+                    <span>|</span>
+        <a target="_blank"  href="/#/views/boundaryseed">Show Seed Points</a>
+        </div>
+                </form>
+        </div>
+    </div>
+
+    <br>
+    <div id="legend">
+        <md-card>
+            <md-card-title>
+                <span>Legend</span>
+            </md-card-title>
+            <md-card-content>
+                <ul ng-repeat="colour in colours">
+                    <li>
+                        <div layout="row" layout-align="center center">
+                        <div><svg height="20" width="20">
+                        <circle cx="10" cy="10" r="5" stroke="colour" stroke-width="1" fill="{{colour}}" />
+                        Sorry, your browser does not support inline SVG.
+                    </svg></div>
+                        <div>{{colours.indexOf(colour)}}</div>
+                    </div></li>
+                </ul>
+            </md-card-content>
+        </md-card>
+    </div>
+</div>
+        <!--<div>-->
+<!--<md-card>-->
+    <!--<md-card-content>-->
+        <!--&lt;!&ndash;<nvd3 options="options" data="dataDetails" style="top: 10px; left: 10px; width:700px; height:720px; float:left"></nvd3>&ndash;&gt;-->
+    <!--</md-card-content>-->
+<!--</md-card>-->
+        <!--</div>-->
+
+    <!--<div layout="row" layout-align="center" >
+        <div id="params2">
+            <input type="text" value="District ID" id="districtID" name="districtID" onfocus="if (this.value == 'District ID') this.value=''">
+            <button ng-click="submitDistrictID()">Get Patrol Beats</button>
+        </div>
+    </div>-->
+</div>
+    <div class="overlay" ng-if="isLoading == true">
+        <div class="container" ng-class="{'visible' : !vm.activated}">
+            <!--<md-progress-linear md-mode="query" ng-disabled="!vm.showList[1]"></md-progress-linear>-->
+            <div id="progress-middle">
+                <md-progress-circular md-mode="indeterminate" ng-show="isLoading"  md-diameter="150"></md-progress-circular>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+    <div id="map" style="width:100%; height:100%; float: left"></div>
+
+
+
+
+<script src="/resources/js/controller/BoundaryController.js"></script>

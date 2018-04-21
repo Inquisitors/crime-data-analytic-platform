@@ -1,0 +1,391 @@
+<div class="container">
+<div ng-controller="MyCtrl">
+        <!--<div ng-controller="MyCtr>-->
+        <md-card>
+                <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8">
+                <img ng-src="{{imagePath}}" class="md-card-image" alt="Washed Out">
+                        </br></br>
+                    </div>
+                    <div class="col-md-2"></div>
+                </div>
+                <!--<md-card-title>-->
+                    <!--<md-card-title-text>-->
+                        <!--<span class="md-headline">Upload Dataset File</span>-->
+
+                    <!--</md-card-title-text>-->
+                    <!--</md-card-title>-->
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h4>Crime Data</h4>
+                            </div>
+                            <div class="col-md-6">
+                                <md-button type="file" class="md-raised md-primary" ngf-select="uploadFiles($file, $invalidFiles, 1)"
+                                           accept="">
+                                    <!--ngf-max-height="1000"-->
+                                    <!--ngf-max-size="1MB"-->
+                                    Select File</md-button></div>
+
+                        </div>
+                        <md-divider></md-divider>
+                        <br><br>
+
+
+                        <div style="font:smaller">{{f1.name}}
+                            <!--{{errFile.name}} {{errFile.$error}} {{errFile.$errorParam}}-->
+                            <span class="progress" ng-show="f1.progress >= 0">
+          <div style="width:{{f.progress}}%"
+               ng-bind="f1.progress + '%'"></div>
+
+      </span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h4>Census Data</h4>
+                            </div>
+                            <div class="col-md-6">
+                                <md-button type="file" class="md-raised md-primary" ngf-select="uploadFiles($file, $invalidFiles, 0)"
+                                           accept="">
+                                    <!--ngf-max-height="1000"-->
+                                    <!--ngf-max-size="1MB"-->
+                                    Select File</md-button></div>
+
+                        </div>
+                        <md-divider></md-divider>
+                        <br><br>
+
+
+                        <div style="font:smaller">{{f.name}}
+                            <!--{{errFile.name}} {{errFile.$error}} {{errFile.$errorParam}}-->
+                            <span class="progress" ng-show="f.progress >= 0">
+          <div style="width:{{f.progress}}%"
+               ng-bind="f.progress + '%'"></div>
+
+      </span>
+                        </div>
+                        </br></br>
+
+                    </div>
+                    <!--<div class="col-md-4">-->
+                        <!--<div class="row">-->
+                            <!--<div class="col-md-6">-->
+                                <!--<h4>Tract Data</h4>-->
+                            <!--</div>-->
+                            <!--<div class="col-md-6">-->
+                                <!--<md-button type="file" class="md-raised md-primary" ngf-select="uploadFiles($file, $invalidFiles, 2)"-->
+                                           <!--accept="">-->
+                                    <!--&lt;!&ndash;ngf-max-height="1000"&ndash;&gt;-->
+                                    <!--&lt;!&ndash;ngf-max-size="1MB"&ndash;&gt;-->
+                                    <!--Select File</md-button></div>-->
+
+                        <!--</div>-->
+                        <!--<md-divider></md-divider>-->
+                        <!--<br><br>-->
+
+
+                        <!--<div style="font:smaller">{{f2.name}}-->
+                            <!--&lt;!&ndash;{{errFile.name}} {{errFile.$error}} {{errFile.$errorParam}}&ndash;&gt;-->
+                            <!--<span class="progress" ng-show="f2.progress >= 0">-->
+          <!--<div style="width:{{f.progress}}%"-->
+               <!--ng-bind="f2.progress + '%'"></div>-->
+
+      <!--</span>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    </div>
+            <md-content  ng-controller="MyCtrl">
+        <md-tabs md-dynamic-height="" md-border-bottom="">
+
+            <md-tab label="Crime Data">
+                <md-content class="md-padding">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h3 class="md-display-1">Select Crime Data File</h3>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="container" layout="row" layout-align="end center" ng-class="{'visible' : !vm.activated}">
+                                <!--<md-progress-linear md-mode="query" ng-disabled="!vm.showList[1]"></md-progress-linear>-->
+                                <md-progress-circular md-mode="indeterminate" ng-show="isCrimeFileLoading"></md-progress-circular>
+
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <md-button class="md-raised md-primary" ng-click="updateLists()">Refresh List</md-button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <md-radio-group ng-model="crimeData.files">
+                                <div class="row" ng-repeat="item in files2">
+                                    <div class="col-md-10">
+                                        <md-radio-button value="{{item}}" class="md-primary">{{item}}</md-radio-button>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <md-button class="md-icon-button md-primary" aria-label="Settings" ng-disabled="crimeData.files == item" ng-click="removeFile(item,1)">
+                                            <md-icon md-svg-icon="/resources/svg/delete.svg"></md-icon>
+                                        </md-button>
+                                    </div>
+                                </div>
+                            </md-radio-group>
+                        </div>
+                        <div class="col-md-8" ng-if="showCrimeColumns == true">
+                            <md-card>
+                                <md-card-title>
+                                    <md-card-title-text>
+                                        <span class="md-headline">Configure Required Columns</span>
+                                    </md-card-title-text>
+                                </md-card-title>
+                                <md-card-content>
+                                    <form name="projectForm">
+                                        <!--<div class="row">-->
+                                            <!--<md-input-container class="md-block" flex-gt-sm="">-->
+                                                <!--<label>Enter Table Name</label>-->
+                                                <!--<input title="Table Name" ng-model="crimeTableName.value">-->
+                                            <!--</md-input-container>-->
+                                        <!--</div>-->
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <legend>Select Column Name to be Set</legend>
+                                                <form ng-submit="submitRadio()">
+                                                    <md-radio-group ng-model="crimeColumnNames.value">
+
+                                                        <md-radio-button value="one" class="md-primary">Dates</md-radio-button>
+                                                        <md-radio-button value="two">Category</md-radio-button>
+                                                        <md-radio-button value="three">Day of Week</md-radio-button>
+                                                        <md-radio-button value="four">Police Districts</md-radio-button>
+                                                        <md-radio-button value="five">Resolution</md-radio-button>
+                                                        <md-radio-button value="six">Latitude</md-radio-button>
+                                                        <md-radio-button value="seven">Longitude</md-radio-button>
+
+                                                    </md-radio-group>
+                                                </form>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <legend>Select Required Column from File</legend>
+                                                <md-radio-group ng-model="selectCrimeColumnNames.value" ng-repeat="column in availableCrimeColumns">
+                                                    <md-radio-button ng-value="column" class="md-primary">{{column}}</md-radio-button>
+                                                </md-radio-group>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <table id="table1">
+                                                    <tr id="tr1">
+                                                        <th id="th1">Column to be Set</th>
+                                                        <th id="th1">Column Set from File</th>
+                                                    </tr>
+                                                    <tr id="tr1">
+                                                        <td id="td1">Dates</td>
+                                                        <td id="td1">{{crimeColumnDates.value}}</td>
+                                                    </tr>
+                                                    <tr id="tr1">
+                                                        <td id="td1">Category</td>
+                                                        <td id="td1">{{crimeColumnCat.value}}</td>
+                                                    </tr>
+                                                    <tr id="tr1">
+                                                        <td id="td1">Day of Week</td>
+                                                        <td id="td1">{{crimeColumnWeek.value}}</td>
+                                                    </tr>
+                                                    <tr id="tr1">
+                                                        <td id="td1">Police Districts</td>
+                                                        <td id="td1">{{crimeColumnPd.value}}</td>
+                                                    </tr>
+                                                    <tr id="tr1">
+                                                        <td id="td1">Resolution</td>
+                                                        <td id="td1">{{crimeColumnResolution.value}}</td>
+                                                    </tr>
+                                                    <tr id="tr1">
+                                                        <td id="td1">Latitude</td>
+                                                        <td id="td1">{{crimeColumnLat.value}}</td>
+                                                    </tr>
+                                                    <tr id="tr1">
+                                                        <td id="td1">Longitude</td>
+                                                        <td id="td1">{{crimeColumnLon.value}}</td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <!--<div class="col-md-4">-->
+                                                <!--<md-input-container>-->
+                                                    <!--<label>Column for Longitude</label>-->
+                                                    <!--<md-select name="type" title="Column for Longitude" ng-model="crimeColumnLon.value" required="">-->
+                                                        <!--<md-option ng-value="column" ng-repeat="column in availableCrimeColumns">{{column}}</md-option>-->
+                                                    <!--</md-select>-->
+                                                <!--</md-input-container>-->
+                                            <!--</div>-->
+                                            <div class="col-md-4">
+                                                <div class="container" layout="row" layout-align="end center" ng-class="{'visible' : !vm.activated}">
+                                                    <!--<md-progress-linear md-mode="query" ng-disabled="!vm.showList[1]"></md-progress-linear>-->
+                                                    <md-progress-circular md-mode="indeterminate" ng-show="isLoading"></md-progress-circular>
+                                                    <div class="bottom-block">
+                                                        <span ng-if="isLoading">Configuring.. Please wait..</span>
+                                                        <span ng-if="isPrepCompleted">Configuring completed</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <md-button type="submit" ng-click="setCrimeColumns()" ng-disabled="crimeColumnDates.value.length == 0 || crimeColumnCat.value.length == 0 || crimeColumnWeek.value.length == 0 || crimeColumnPd.value.length == 0 || crimeColumnResolution.value.length == 0 || crimeColumnLat.value.length == 0 || crimeColumnLon.value.length == 0">Submit</md-button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </md-card-content>
+                            </md-card>
+                        </div>
+                    </div>
+                </md-content>
+            </md-tab>
+            <md-tab label="Census Data">
+                <md-content class="md-padding">
+                    <div class="row">
+                        <div class="col-md-6">
+
+
+                            <h3 class="md-display-1">Select Census Data File</h3>
+                            </div>
+                        <div class="col-md-2">
+                            <div class="container" layout="row" layout-align="end center" ng-class="{'visible' : !vm.activated}">
+                                <!--<md-progress-linear md-mode="query" ng-disabled="!vm.showList[1]"></md-progress-linear>-->
+                                <md-progress-circular md-mode="indeterminate" ng-show="isCensusFileLoading"></md-progress-circular>
+
+                            </div>
+                            </div>
+                        <div class="col-md-4">
+                            <md-button class="md-raised md-primary" ng-click="updateLists()">Refresh List</md-button>
+                            </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                    <md-radio-group ng-model="censusData.files">
+                        <div class="row" ng-repeat="item in files1">
+                            <div class="col-md-10">
+                        <md-radio-button  value="{{item}}" class="md-primary">{{item}}</md-radio-button>
+                                </div>
+                            <div class="col-md-2">
+                        <md-button class="md-icon-button md-primary" aria-label="Settings" ng-disabled="censusData.files == item" ng-click="removeFile(item,0)">
+                            <md-icon md-svg-icon="/resources/svg/delete.svg"></md-icon>
+                        </md-button>
+                                </div>
+                        </div>
+                    </md-radio-group>
+                            </div>
+                        <div class="col-md-8" ng-if="showCensusColumns == true">
+                            <md-card>
+                                <md-card-title>
+                                    <md-card-title-text>
+                                        <span class="md-headline">Configure Required Columns</span>
+                                    </md-card-title-text>
+                                </md-card-title>
+                                <md-card-content>
+                                    <!--<div class="row">-->
+                                    <!--<md-input-container class="md-block" flex-gt-sm="">-->
+                                        <!--<label>Enter Table Name</label>-->
+                                        <!--<input ng-model="tablename.value">-->
+                                    <!--</md-input-container>-->
+                                    <!--</div>-->
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <legend>Select Column Name to be Set</legend>
+                                        <form ng-submit="submitRadio()">
+                                        <md-radio-group ng-model="censusColumnNames.value">
+
+                                            <md-radio-button value="one" class="md-primary">Population</md-radio-button>
+                                            <md-radio-button value="two">Latitude</md-radio-button>
+                                            <md-radio-button value="three">Longitude</md-radio-button>
+
+                                        </md-radio-group>
+                                            </form>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <fieldset>
+                                            <legend>Select Required Column from File</legend>
+                                            <md-radio-group ng-model="selectColumnNames.value" ng-repeat="column in availableCensusColumns">
+                                                <md-radio-button ng-value="column" class="md-primary">{{column}}</md-radio-button>
+                                            </md-radio-group>
+                                                </fieldset>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <table id="table1">
+                                                <tr id="tr1">
+                                                    <th id="th1">Column to be Set</th>
+                                                    <th id="th1">Column Set from File</th>
+                                                </tr>
+                                                <tr id="tr1">
+                                                    <td id="td1">Population</td>
+                                                    <td id="td1">{{columnPopulation.value}}</td>
+                                                </tr>
+                                                <tr id="tr1">
+                                                    <td id="td1">Latitude</td>
+                                                    <td id="td1">{{columnLat.value}}</td>
+                                                </tr>
+                                                <tr id="tr1">
+                                                    <td id="td1">Longitude</td>
+                                                    <td id="td1">{{columnLong.value}}</td>
+                                                </tr>
+                                                </table>
+
+                                            </div>
+
+                                        </div>
+
+                                    <div class="row">
+                                        <div class="col-md-8"></div>
+                                        <div class="col-md-2">
+                                            <div class="container" layout="row" layout-align="end center" ng-class="{'visible' : !vm.activated}">
+                                                <!--<md-progress-linear md-mode="query" ng-disabled="!vm.showList[1]"></md-progress-linear>-->
+                                                <md-progress-circular md-mode="indeterminate" ng-show="isCensusTableLoading"></md-progress-circular>
+                                                <div class="bottom-block">
+                                                    <span ng-if="isLoading">Configuring.. Please wait..</span>
+                                                    <span ng-if="isPrepCompleted">Configuring completed</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                        <md-button class="md-primary md-raised" type="submit"  ng-click="setCensusColumns()" ng-disabled="columnPopulation.value.length == 0 || columnLat.value.length == 0 || columnLong.value == 0">Submit</md-button>
+                                        </div>
+                                    </div>
+                                </md-card-content>
+                                </md-card>
+                            </div>
+                    </div>
+                </md-content>
+            </md-tab>
+
+            <!--<md-tab label="Tract Data">-->
+                <!--<md-content class="md-padding">-->
+                    <!--<div class="row">-->
+                        <!--<div class="col-md-6">-->
+                            <!--<h3 class="md-display-1">Select Tract Data File</h3>-->
+                        <!--</div>-->
+                        <!--<div class="col-md-6">-->
+                            <!--<md-button class="md-raised md-primary" ng-click="updateLists()">Refresh List</md-button>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="row">-->
+                        <!--<div class="col-md-4">-->
+                            <!--<md-radio-group ng-model="tractData.files">-->
+                                <!--<div class="row" ng-repeat="item in files3">-->
+                                    <!--<div class="col-md-10">-->
+                                        <!--<md-radio-button value="item" class="md-primary">{{item}}</md-radio-button>-->
+                                    <!--</div>-->
+                                    <!--<div class="col-md-2">-->
+                                        <!--<md-button class="md-icon-button md-primary" aria-label="Settings" ng-disabled="tractData.files == item" ng-click="removeFile(item,2)">-->
+                                            <!--<md-icon md-svg-icon="/resources/svg/delete.svg"></md-icon>-->
+                                        <!--</md-button>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</md-radio-group>-->
+                        <!--</div>-->
+                        <!--<div class="col-md-8">-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</md-content>-->
+            <!--</md-tab>-->
+        </md-tabs>
+    </md-content>
+</md-card>
+</div>
+</div>

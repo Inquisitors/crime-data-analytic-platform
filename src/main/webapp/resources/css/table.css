@@ -1,0 +1,16 @@
+#table1 {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#th1, #td1 {
+    text-align: left;
+    padding: 8px;
+}
+
+#tr1:nth-child(even){background-color: #f2f2f2}
+
+#th1 {
+    background-color: #4CAF50;
+    color: white;
+}

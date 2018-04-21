@@ -1,0 +1,30 @@
+<div ng-controller="BoundaryEvaluationController">
+<md-card>
+    <md-card-title>
+        <md-card-title-text>
+            <h1 class="page-header">Evaluation
+                <small>Evaluation of Boundaries</small>
+            </h1>
+        </md-card-title-text>
+    </md-card-title>
+    <md-card-content>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10">
+        <!--<nvd3 options="options" data="dataDetails" style=" width:700px; height:720px; float:left"></nvd3>-->
+            <nvd3 options="options" data="dataDetails"></nvd3>
+                </div>
+                <div class="col-md-2">
+                    <div layout="column" layout-align="canter canter">
+                    <span>Gini Coefficient:
+                        {{giniValue}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+             <nvd3 options="options2" data="dataDetails2"></nvd3>
+            </div>
+        </div>
+        </md-card-content>
+    </md-card>
+    </div>

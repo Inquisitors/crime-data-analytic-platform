@@ -1,0 +1,195 @@
+<div class="container">
+<div ng-controller="queryController">
+
+
+            <md-card>
+                <md-card-content>
+                    <div class="row">
+                        <div class="col-md-2"></div>
+                        <div class="col-md-8">
+                    <img ng-src="{{imagePath}}" class="md-card-image" alt="Washed Out">
+                        </div>
+                        <div class="col-md-2"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-headline">Enter your Query</span>
+                        </md-card-title-text>
+                    </md-card-title>
+
+            <form name="colorForm">
+                <br/>
+                <md-input-container>
+                    <label>Query</label>
+                    <textarea name="query" ng-model="query" required rows="4" cols="50"></textarea>
+                    <br/>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <br/>
+                    <md-button ng-click="executeQuery()" class="md-raised md-primary" ng-disabled="colorForm.$invalid">Execute</md-button>
+                        </div>
+                        <!--<div class="col-md-6">-->
+                            <!--<md-input-container>-->
+                                <!--<label>Available Columns</label>-->
+                                <!--<md-select ng-model="selectedAlgo.label">-->
+                                    <!--<md-optgroup label="label">-->
+                                        <!--<md-option ng-value="label" ng-repeat="label in labels">{{label}}</md-option>-->
+                                    <!--</md-optgroup>-->
+                                <!--</md-select>-->
+                            <!--</md-input-container>-->
+                        <!--</div>-->
+                    </div>
+                </md-input-container>
+                <!--<div class="container" layout="row" layout-align="end center"ng-class="{'visible' : !vm.activated}">-->
+                    <!--&lt;!&ndash;<md-progress-linear md-mode="query" ng-disabled="!vm.showList[1]"></md-progress-linear>&ndash;&gt;-->
+                    <!--<md-progress-circular md-mode="indeterminate" ng-show="isLoading"></md-progress-circular>-->
+                    <div class="bottom-block">
+                        <span ng-if="isLoading">Loading.. Please wait..</span>
+                        <span ng-if="isPrepCompleted">Loading completed</span>
+                    </div>
+                <!--</div>-->
+            </form>
+                            </div>
+                        <div class="col-md-4">
+                            <md-card>
+                                <md-card-title>
+                                    <md-card-title-text>
+                                      <span class="md-headline">Available Columns</span>
+                                    </md-card-title-text>
+                                </md-card-title>
+                                        <md-card-content>
+                            <table>
+                                <tr ng-repeat="label in labels">
+                                    <td>{{label}}</td>
+                                </tr>
+                            </table>
+                                            </md-card-content>
+                            </md-card>
+                            </div>
+                        <div class="col-md-4">
+                            <md-card>
+                                <md-card-title>
+                                    <md-card-title-text>
+                                        <span class="md-headline">Query Search</span>
+                                    </md-card-title-text>
+                                </md-card-title>
+                                <md-card-content>
+                                    <p>Enter a query to find values in the dataset using the table name given by you to preprocess dataset.</p>
+                                    </md-card-content>
+                            </md-card>
+                        </div>
+                    </div>
+
+                    </md-card-content>
+                </md-card>
+            <!--<md-input-container>-->
+            <!--&lt;!&ndash;<textarea rows="8" wrap='off' show-tail>&ndash;&gt;-->
+            <!--<textarea name="results"  ng-readonly="true" rows="10" cols="50" show-tail>{{results}}</textarea>-->
+            <!--<br/>-->
+            <!--</md-input-container>-->
+
+
+
+
+    <div class="row"  ng-show="visible == true">
+
+        <md-card>
+            <md-card-content>
+                <div>
+                    <pagination
+                            ng-model="currentPage"
+                            total-items="results.length"
+                            max-size="maxSize"
+                            boundary-links="true">
+                    </pagination>
+                <table id="table1">
+                <tr id="tr1" ng-repeat="result in filteredResults">
+                <td id="td1" ng-repeat="res in result">{{res}}</td>
+                </tr>
+                </table>
+
+                </div>
+
+            </md-card-content>
+        </md-card>
+
+
+
+    </div>
+    <div class="overlay" ng-if="isLoading == true">
+        <div class="container" ng-class="{'visible' : !vm.activated}">
+            <!--<md-progress-linear md-mode="query" ng-disabled="!vm.showList[1]"></md-progress-linear>-->
+            <div id="progress-middle">
+                <md-progress-circular md-mode="indeterminate" ng-show="isLoading"  md-diameter="150"></md-progress-circular>
+
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+<!--<div class="col-md-8">
+    <h1>View 1</h1>
+    <md-sidenav md-component-id="left" class="md-sidenav-left">
+    <md-toolbar>
+        &lt;!&ndash;Menu&ndash;&gt;
+    </md-toolbar>
+    &lt;!&ndash;<md-button id="summary" ng-click="getView1()">Summary</md-button><br/>
+    <md-button id="predictions">Predictions</md-button><br/>
+    <md-button id="prescriptions">Prescriptions</md-button><br/>&ndash;&gt;
+    <a href="/#/views/file-upload">Upload File</a><br/>
+    <a href="/#/views/1">Summary</a><br/>
+    <a href="/#/views/2">Predictions</a><br/>
+
+    </md-sidenav>
+</div>
+</div>-->
+
+<!--<div ng-controller="MyController" layout="column" style="height:500px;" ng-cloak>
+
+    <section layout="row" flex>
+    &lt;!&ndash;<md-button ng-click="openLeftMenu()">
+        Open Left Menu
+    </md-button>&ndash;&gt;
+    <md-sidenav
+            class="md-sidenav-left"
+            md-component-id="left"
+            md-is-locked-open="true"
+            md-whiteframe="4">
+
+        <md-toolbar class="md-theme-indigo">
+            <h1 class="md-toolbar-tools">Sidenav Left</h1>
+        </md-toolbar>
+        <md-content layout-padding>
+
+            <p hide show-gt-md>
+                This sidenav is locked open on your device. To go back to the default behavior,
+                narrow your display.
+            </p>
+        </md-content>
+
+    </md-sidenav>
+
+
+</div>-->
+
+<!--<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
+
+<!--&lt;!&ndash; jQuery library &ndash;&gt;-->
+<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>-->
+
+<!--&lt;!&ndash; Latest compiled JavaScript &ndash;&gt;-->
+<!--<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+
+<!--<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css">-->
+<!--<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>-->
+<!--<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>-->
+<!--<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>-->
+<!--<script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>-->
+
+<!--<link rel="stylesheet" type="text/css"-->
+      <!--href="https://cdnjs.cloudflare.com/ajax/libs/angularjs-slider/5.4.0/rzslider.min.css"/>-->
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/angularjs-slider/5.4.0/rzslider.min.js"></script>-->

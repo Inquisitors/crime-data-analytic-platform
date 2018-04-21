@@ -1,0 +1,42 @@
+<div ng-controller="BeatsEvaluationController">
+    <md-card>
+        <md-card-title>
+            <md-card-title-text>
+                <h1 class="page-header">Evaluation
+                    <small>Evaluation of Boundaries</small>
+                </h1>
+            </md-card-title-text>
+        </md-card-title>
+        <md-card-content>
+            <div class="container">
+                <div class="row">
+                <span>Gini Coefficient: {{beatsGini}}</span>
+                </div>
+                <div class="row">
+
+                        <nvd3 options="options3" data="data3"></nvd3>
+                </div>
+                <div class="row">
+            <nvd3 options="options2" data="data2"></nvd3>
+            </div>
+
+                <div class="row">
+                    <nvd3 options="options" data="data"></nvd3>
+                    <div id="progress-middle">
+                        <md-progress-circular md-mode="indeterminate" ng-show="isLoading"></md-progress-circular>
+                    </div>
+                </div>
+
+            </div>
+        </md-card-content>
+    </md-card>
+    <!--<div class="overlay" ng-if="isLoading == true">-->
+        <!--<div class="container" ng-class="{'visible' : !vm.activated}">-->
+            <!--&lt;!&ndash;<md-progress-linear md-mode="query" ng-disabled="!vm.showList[1]"></md-progress-linear>&ndash;&gt;-->
+            <!--<div id="progress-middle">-->
+                <!--<md-progress-circular md-mode="indeterminate" ng-show="isLoading"  md-diameter="150"></md-progress-circular>-->
+
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+</div>

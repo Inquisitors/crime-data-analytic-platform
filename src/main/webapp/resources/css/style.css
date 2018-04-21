@@ -1,0 +1,153 @@
+
+#side-nav-button{
+    min-width : 90% !important;
+}
+
+.overlay {
+    background-color:#EFEFEF;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 100000;
+    top: 0px;
+    left: 0px;
+    opacity: .7; /* in FireFox */
+    filter: alpha(opacity=50); /* in IE */
+}
+
+#progress-middle {
+    position:fixed;
+    top: 50%;
+    left: 50%;
+}
+
+#contain {
+    position: relative;
+}
+
+._md-sidenav-backdrop {
+height: 100% !important;
+position: fixed !important;
+}
+.md-sidenav-right {
+position: fixed;
+}
+
+legend{
+    font-size: 15px !important;
+    margin-bottom: 6px !important;
+}
+
+.md-padding {
+    padding: 0px !important;
+}
+
+/**to increase the z-index of sidenav**************/
+md-sidenav.md-altTheme-theme, md-sidenav.md-altTheme-theme md-content {
+    z-index: 99999;
+}
+
+/****padding to stop text touching md-card*******/
+.row{
+    padding: 10px;
+}
+
+md-toolbar{
+min-height: 42px;
+}
+
+
+.md-select-value {
+    min-width: 160px !important;
+}
+
+md-content.md-altTheme-theme {
+
+}
+
+md-card.md-altTheme-theme {
+ //opacity: 0.9;
+}
+
+.md-subheader {
+    color: rgb(227, 230, 244);
+    background-color: rgb(63, 81, 181);
+}
+
+.listdemoBasicUsage md-divider {
+  margin-top: 10px;
+  margin-bottom: 0; }
+
+
+
+.simple-navbar {
+  background-color: #eee;
+  padding: 1em;
+}
+
+.simple-navbar .tuxedo-menu-trigger {
+  font-size: 24px;
+  color: #000;
+}
+
+.simple-navbar a:hover,
+.simple-navbar a:focus {
+  text-decoration: none;
+}
+
+#md-toolbar{
+    background-color: rgb(250, 250, 250);
+    color: rgb(39, 39, 39);
+}
+
+.sidebar {
+    position : absolute;
+    top : 0;
+    left : -160px;;
+    transition : 100ms left;
+}
+#navigation-toggle {
+        position : absolute;
+        left : 160px;
+        background : rgba(3,159,244,.95);
+        color : white;
+        text-decoration : none;
+        padding : 20px;
+}
+.show {
+    left : 0;
+}
+.navigation {
+    list-style : none;
+    padding : 0;
+    margin : 0;
+}
+.navigation-items a {
+    display : block;
+    background-color : #444;
+    color : white;
+    line-height : 2em;
+    text-decoration : none;
+    padding : 10px 30px;
+    width : 100px;
+
+}
+.navigation-items a:hover {
+    background-color : #222;
+}
+
+.navBardemoBasicUsage md-content .ext-content {
+  padding: 50px;
+  margin: 20px;
+  background-color: #FFF2E0; }
+
+.imagesize {
+    height : 150px;
+    width  : 800px;
+}
+
+/*to set the minimum width of text boxes***********/
+.md-select-value{
+        min-width: 175px;
+}
+

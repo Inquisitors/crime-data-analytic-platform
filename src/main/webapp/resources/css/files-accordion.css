@@ -1,0 +1,61 @@
+.week-label {
+  color: #777777;
+  margin-bottom: 5px;
+  font-size: 16px;
+}
+
+.tab {
+  position: relative;
+  margin-bottom: 1px;
+  width: 100%;
+  color: black;
+  overflow: hidden;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),
+              0 2px 10px 0 rgba(0,0,0,0.12);
+}
+
+input {
+  position: absolute;
+  opacity: 0;
+  z-index: -1;
+}
+
+label {
+  position: relative;
+  display: block;
+  padding: 0 0 0 1em;
+  background: white;
+  font-weight: bold;
+  line-height: 3;
+  cursor: pointer;
+}
+
+.hours {
+  float: right;
+  margin-right: 40px;
+}
+
+.members {
+  float: right;
+  margin-right: 60px;
+  font-weight: 400;
+  color: #636363;
+}
+
+.tab-content {
+  max-height: 0;
+  overflow: hidden;
+  background: white;
+  -webkit-transition: max-height .35s;
+  -o-transition: max-height .35s;
+  transition: max-height .35s;
+}
+
+.tab-content p {
+  margin: 1em;
+}
+
+/* :checked */
+input:checked ~ .tab-content {
+  max-height: 10em;
+}

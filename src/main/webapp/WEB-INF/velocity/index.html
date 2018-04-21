@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<!--[if lt IE 7]>
+<html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>My AngularJS App</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--<link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
+    <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
+    <link rel="stylesheet" href="app.css">-->
+    <!--<script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>-->
+    <link data-require="bootstrap-css@2.3.2" data-semver="2.3.2" rel="stylesheet" href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" />
+
+    <link rel="stylesheet" href="/resources/css/bootstrap.css"/>
+    <link rel="stylesheet" href="/resources/css/app.css"/>
+    <link rel="stylesheet" href="/resources/css/style.css">
+    <link rel="stylesheet" href="/resources/css/accordian.css">
+    <link rel="stylesheet" href="/resources/css/upload.css">
+    <link rel="stylesheet" href="/resources/css/input.css">
+    <link rel="stylesheet" href="/resources/css/table.css">
+    <link rel="stylesheet" href="/resources/css/pagination.css">
+    <link rel="stylesheet" href="/resources/css/dialog.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-route.js"></script>
+
+    <script src="/resources/js/node_modules/ng-file-upload/dist/ng-file-upload-shim.min.js"></script>
+    <!-- for no html5 browsers support -->
+    <script src="/resources/js/node_modules/ng-file-upload/dist/ng-file-upload.min.js"></script>
+
+    <script src="//code.angularjs.org/1.2.12/angular-animate.min.js" type="text/javascript"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.10.0/ui-bootstrap-tpls.min.js"
+            type="text/javascript"></script>
+
+    <script src="/resources/js/app.js"></script>
+    <script src="/resources/js/service/ItemService.js"></script>
+    <script src="/resources/js/service/fcsaNumber.js"></script>
+    <!--<script src="/resources/js/service/angular-drag-and-drop-lists.js"></script>-->
+
+
+    <script src="/resources/js/controller/MainController.js"></script>
+    <script src="/resources/js/controller/QueryWindowController.js"></script>
+    <script src="/resources/js/controller/HistogramController.js"></script>
+    <script src="/resources/js/controller/FileuploadController.js"></script>
+    <script src="/resources/js/controller/FileUploaderController.js"></script>
+    <script src="/resources/js/controller/PredictionController.js"></script>
+    <script src="/resources/js/controller/HeatmapTimelapsController.js"></script>
+    <script src="/resources/js/controller/BoundaryController.js"></script>
+    <script src="/resources/js/controller/BeatsController.js"></script>
+    <script src="/resources/js/controller/BoundaryControllerTest.js"></script>
+    <script src="/resources/js/controller/BoundaryEvaluationController.js"></script>
+    <script src="/resources/js/controller/BeatsEvaluationController.js"></script>
+    <script src="/resources/js/controller/HeatmapCompareController.js"></script>
+    <script src="/resources/js/controller/BoundarySeedsController.js"></script>
+    <script type="text/javascript" src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerwithlabel/src/markerwithlabel.js"></script>
+
+
+</head>
+<body background="/resources/images/nebulaa.png">
+
+
+<!--[if lt IE 7]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+    your browser</a> to improve your experience.</p>
+<![endif]-->
+
+<!--<div ng-view></div>-->
+
+<!--<div id="toolBar" ng-controller="MyController">-->
+<!--<md-toolbar>-->
+<!--<md-button ng-click="openLeftMenu()">-->
+<!--Inquisitor-->
+<!--</md-button>-->
+<!--</md-toolbar>-->
+<!--</div>-->
+<div ng-cloak="" ng-controller="MyController" class="navBardemoBasicUsage">
+    <md-content md-theme="docs-dark" class="md-padding">
+        <!--<md-nav-bar md-selected-nav-item="currentNavItem" nav-bar-aria-label="navigation links"/>-->
+        <!--</md-nav-item>-->
+        <!--<div layout="row" layout-align="space-between end">-->
+            <!--<div>-->
+                <!--<md-nav-item md-nav-click="toggleLeft()" name="page4">-->
+                    <!--<md-icon md-svg-src="/resources/svg/menu.svg" aria-label="android "></md-icon>-->
+                <!--</md-nav-item>-->
+            <!--</div>-->
+            <!--&lt;!&ndash;<div><md-nav-item md-nav-click="toggleRight()" name="page5"><md-icon md-svg-src="/resources/svg/options.svg" aria-label="android "></md-icon></md-nav-item></div>&ndash;&gt;-->
+            <!--<div>-->
+                <!--<md-nav-item md-nav-click="" name="page9">Inquisitors</md-icon></md-nav-item>-->
+            <!--</div>-->
+            <!--<md-nav-item flex=""></md-nav-item>-->
+            <!--<div>-->
+                <!--<md-nav-item md-nav-click="toggleRight()" name="page9">Datasets</md-icon></md-nav-item>-->
+            <!--</div>-->
+        <!--</div>-->
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <md-button class="md-icon-button" ng-click="toggleLeft()" aria-label="Settings">
+                    <md-icon md-svg-icon="img/icons/menu.svg"></md-icon>
+                </md-button>
+                <h2>
+                    <span>Inquisitor</span>
+                </h2>
+
+                <!--<span flex="30"></span>-->
+
+                <!--<md-button>-->
+                    <!--<img src="/resources/images/logo-new.png" height="300" width="300">-->
+                <!--</md-button>-->
+                <span flex=""></span>
+                <md-button class="md-icon-button" aria-label="Icon" ng-click="toggleRight()">
+                    <md-tooltip>Data Set</md-tooltip>
+                    <md-icon class="md-default-theme" md-svg-icon="resources/svg/data-set.svg"><p>Data Set</p></md-icon>
+                </md-button>
+                <!--<span ng-click="toggleRight()">-->
+                    <!--Data Sets-->
+                <!--</span>-->
+            </div>
+        </md-toolbar>
+</div>
+
+
+<section layout="row" flex="">
+
+    <div ng-controller="MyController">
+        <md-sidenav class="md-sidenav-right" md-component-id="right" md-whiteframe="4">
+
+            <md-toolbar class="md-theme-light">
+                <h1 class="md-toolbar-tools">Data Sets</h1>
+            </md-toolbar>
+            <md-content layout-margin="">
+                <md-button id="side-nav-button" class="md-raised md-primary" aria-label="Learn More" ng-click="toggleDataSet()">
+                    Refresh
+                </md-button>
+                <!--<div><h3>Uploaded File:{{crimeFileName}}</h3></div>-->
+                <md-list flex="">
+                    <!--<md-list-item class="md-3-line" ng-repeat="" ng-click="">-->
+                    <md-list-item class="md-3-line"><h3>Crime File:
+                        <strong>{{crimeFileName}}</strong></h3>
+                    </md-list-item>
+                    <md-divider></md-divider>
+                    <md-list-item class="md-3-line">
+                        <md-list flex=""><md-list-item><h4>Table Name:<strong>{{crimeTable}}</strong></h4></md-list-item>
+                                        <md-list-item><h4>No of Rows :<strong>{{crimeTableRows}}</strong></h4></md-list-item>
+                    </md-list></md-list-item>
+                    <md-divider></md-divider>
+                        <h4>Column Names:</h4>
+                        <table>
+                            <tr ng-repeat="column in crimeTableColumns">
+                                <td>{{column}}</td>
+                            </tr>
+                        </table>
+                </md-list>
+            </md-content>
+
+        </md-sidenav>
+
+        <!-- md-disable-backdrop="true"-->
+        <md-sidenav class="md-sidenav-left" md-component-id="left" md-whiteframe="4">
+
+            <md-toolbar class="md-theme-indigo">
+                <h1 class="md-toolbar-tools">Inquisitor</h1>
+            </md-toolbar>
+
+            <md-content layout-margin="">
+                <md-list flex="">
+                    <md-subheader class="md-no-sticky">Preprocessing</md-subheader>
+                    <md-list-item ng-repeat="item in home" ng-click="go(item.path)">
+                        <md-icon class="md-default-theme" class="material-icons" md-svg-src="{{item.image}}"></md-icon>
+                        <p>{{item.who}}</p>
+                        <!--<div class="md-list-item-text" layout="row" layout-align="space-between center">-->
+                            <!--<div><h3>{{ item.who }}</h3></div>-->
+                            <!--<div>-->
+                                <!--<md-icon md-svg-src="{{item.image}}" aria-label="android ">-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    </md-list-item>
+
+                    <!--<button class="accordion">Preprocessing</button>-->
+                    <!--<div class="panel">-->
+                        <md-list-item ng-repeat="item in preprocess" ng-click="go(item.path)">
+                            <md-icon class="md-default-theme" class="material-icons" md-svg-src="{{item.image}}"></md-icon>
+                            <p>{{ item.who }}</p>
+                        </md-list-item>
+                    <md-divider></md-divider>
+                    <md-subheader class="md-no-sticky">Visualization</md-subheader>
+
+                        <md-list-item ng-repeat="item in visualization" ng-click="go(item.path)">
+                            <md-icon class="md-default-theme" class="material-icons" md-svg-src="{{item.image}}"></md-icon>
+                                <p>{{ item.who }}</p>
+                        </md-list-item>
+                    <md-divider></md-divider>
+                    <md-subheader class="md-no-sticky">Prediction</md-subheader>
+                        <md-list-item  ng-repeat="item in prediction" ng-click="go(item.path)">
+                            <md-icon class="md-default-theme" class="material-icons" md-svg-src="{{item.image}}"></md-icon>
+                                <p>{{ item.who }}</p>
+                        </md-list-item>
+                    <md-divider></md-divider>
+                    <md-subheader class="md-no-sticky">Prescription</md-subheader>
+                        <md-list-item ng-repeat="item in prescription" ng-click="go(item.path)">
+                            <md-icon class="md-default-theme" class="material-icons" md-svg-src="{{item.image}}"></md-icon>
+                            <p>{{ item.who }}</p>
+                        </md-list-item>
+
+                    <!--<md-subheader class="md-no-sticky">Visualization</md-subheader>-->
+                </md-list>
+            </md-content>
+
+        </md-sidenav>
+    </div>
+</section>
+<ng-view></ng-view>
+
+<!--<div layout="row" ng-controller="MyController" >-->
+<!--<md-sidenav md-component-id="left" class="md-sidenav-left">-->
+
+<!--<md-toolbar class="md-theme-light">-->
+<!--</md-toolbar>-->
+<!--<md-content>-->
+<!--<accordion close-others="onAtATime">-->
+<!--<accordion-group heading="Preprocessing">-->
+<!--<ul class="list-group">-->
+<!--<li class="list-group-item" draggable="{opacity: .75,helper: 'clone'}">-->
+<!--<a href="/#/views/fileupload">Preprocess Data</a>-->
+<!--</li>-->
+<!--</ul>-->
+<!--</accordion-group>-->
+<!--<accordion-group heading="Summary">-->
+<!--<ul class="list-group">-->
+<!--<li class="list-group-item" draggable="{opacity: .75,helper: 'clone'}">-->
+<!--<a href="/#/views/1">Heat map</a>-->
+<!--</li>-->
+<!--<li class="list-group-item" draggable="{opacity: .75,helper: 'clone'}">-->
+<!--<a href="/#/views/2">Histogram</a>-->
+<!--</li>-->
+<!--<li class="list-group-item" draggable="{opacity: .75,helper: 'clone'}">-->
+<!--<a href="/#/views/query">Query</a>-->
+<!--</li>-->
+<!--</ul>-->
+<!--</accordion-group>-->
+<!--<accordion-group heading="Predictions">-->
+<!--<ul class="list-group">-->
+<!--<li class="list-group-item" draggable="{opacity: .75,helper: 'clone'}">-->
+<!--<a href="/#/views/trainmodel">Train Model</a>-->
+<!--</li>-->
+<!--</ul>-->
+<!--</accordion-group>-->
+<!--<accordion-group heading="Prescriptions">-->
+<!--<ul class="list-group">-->
+<!--<li class="list-group-item" draggable="{opacity: .75,helper: 'clone'}">-->
+<!--<a href="/#/views/1">Option 1</a>-->
+<!--</li>-->
+<!--<li class="list-group-item" draggable="{opacity: .75,helper: 'clone'}">-->
+<!--<a href="/#/views/2">Option 2</a>-->
+<!--</li>-->
+<!--</ul>-->
+<!--</accordion-group>-->
+<!--</accordion>-->
+<!--</md-content>-->
+
+<!--</md-sidenav>-->
+
+<!--<style>-->
+<!--table {-->
+    <!--border-collapse: collapse;-->
+    <!--width: 100%;-->
+<!--}-->
+
+<!--th, td {-->
+    <!--text-align: left;-->
+    <!--padding: 8px;-->
+<!--}-->
+
+<!--tr:nth-child(even){background-color: #f2f2f2}-->
+
+<!--th {-->
+    <!--background-color: #4CAF50;-->
+    <!--color: white;-->
+<!--}-->
+
+<!--</style>-->
+
+
+</div>
+<script type="text/javascript">
+    var acc = document.getElementsByClassName("accordion");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+    acc[i].onclick = function(){
+        this.classList.toggle("active");
+        this.nextElementSibling.classList.toggle("show");
+    }
+}
+
+</script>
+
+
+<!-- In production use:
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
+-->
+<!--<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/angular-route/angular-route.js"></script>-->
+<!--<script src="app.js"></script>-->
+<!--<script src="view1/view1.js"></script>
+<script src="view2/view.js"></script>
+<script src="components/version/version.js"></script>
+<script src="components/version/version-directive.js"></script>
+<script src="components/version/interpolate-filter.js"></script>-->
+
+
+<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
+
+<!-- Angular Material Library -->
+<script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+<script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-114/svg-assets-cache.js"></script>
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<!--<script src="view1/view1.js"></script>-->
+
+<link rel="stylesheet" type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/angularjs-slider/5.4.0/rzslider.min.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angularjs-slider/5.4.0/rzslider.min.js"></script>
+
+
+<!--<script src="/resources/js/compiled/angular-google-maps.js"></script>
+<script src="/resources/js/compiled/angular-simple-logger.js"></script>
+<script src="/resources/js/compiled/lodash.js"></script>-->
+
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=visualization"></script>
+<script src="/resources/js/heatmap.js"></script>
+<link rel="stylesheet" type="text/css" href="/resources/css/heatmap.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.1/nv.d3.min.js"></script>
+<script src="https://rawgit.com/krispo/angular-nvd3/v1.0.5/dist/angular-nvd3.js"></script>
+<script src="https://rawgit.com/rzajac/angularjs-slider/master/dist/rzslider.js"></script>
+
+<script data-require="ui-bootstrap@*" data-semver="0.12.1" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.12.1.min.js"></script>
+</body>
+</html>
