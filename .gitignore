@@ -1,13 +1,13 @@
 # Created by .ignore support plugin (hsz.mobi)
 ### Example user template template
 ### Example user template
+
 # IntelliJ project files
 .idea
 *.iml
 out
 gen### Maven template
 target/
-data/
 pom.xml.tag
 pom.xml.releaseBackup
 pom.xml.versionsBackup
@@ -17,3 +17,4 @@ dependency-reduced-pom.xml
 buildNumber.properties
 .mvn/timing.properties
 
+getResults/6.9271/79.8612
