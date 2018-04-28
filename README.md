@@ -17,8 +17,7 @@ Before getting started, please make sure you have the required tools/software in
 
 1. First, clone the [Crime Data Analytic Framework](https://github.com/Inquisitors/CDAF.git) and build it using 
 `mvn clean install` command.
-2. Then clone and build the project [Crime Data Analytic Platform](https://github
-.com/Inquisitors/crime-data-analytic-platform.git).
+2. Then clone and build the project [Crime Data Analytic Platform](https://github.com/Inquisitors/crime-data-analytic-platform.git).
 3. Within Crime Data Analytic Platform project, run the following command to start the web application.
 `mvn jetty:run`
 
